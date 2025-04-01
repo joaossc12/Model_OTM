@@ -20,7 +20,7 @@ velocidade0 = D(:,6:7);
 %[posicao,tempo,velocidade] = retorna_dados(Periodo,D1,D2,D3);
 dados = [posicao0,velocidade0];
 %[posicao,tempo,velocidade] = retorna_dados(0.115,dados);
-posicao = D(:,1:2);
+posicao = D(:,1:3);
 tempo = time;
 velocidade = velocidade0;
 
