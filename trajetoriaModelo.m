@@ -14,7 +14,7 @@ warning("");
 
 while(i<=size(tempos,1))
     u = U(i,:)';
-    [~,X] = integracaoNumerica(X,u,Tint(i),Tint(i+1),A_taum,V_TRACO,B_taum,M_TRACOi, R, L, F_s, F_k, alpha_s,alpha_k,k_i,k_p);
+    [~,X] = integracaoNumerica_mex(X,u,Tint(i),Tint(i+1),A_taum,V_TRACO,B_taum,M_TRACOi, R, L, F_s, F_k, alpha_s,alpha_k,k_i,k_p);
     dados(i,:) = X;
     %disp("OLHA O X")
     %disp(X)

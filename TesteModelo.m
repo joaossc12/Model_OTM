@@ -1,47 +1,33 @@
 clear
 
-cd 'C:\Users\João Vitor\Desktop\UESC\IC\Rotininha'
-
-%dados = [csvread('diagonal2.csv'); csvread('retax2.csv'); csvread('retay2.csv');];
-Periodo = 0.115;
-startDados = [0,0,0,0,0,0,0,0];
-D = [startDados; csvread('TrajetoriaTeste11.csv')];
 
 
-%time = (0:Periodo:(size(D,1)-1)*Periodo)';
-time = D(:,8);
-Intervalos = time(2:end)-time(1:end-1);
-Tmed = sum(Intervalos)/size(Intervalos,1);
-X0 =[0,0,0,0,0,0,0]';
+D = csvread('Dados\NewDataZZX.csv');
+%goal = csvread('variaveis_14.csv');
+%
+y0 = D(1,2);
+N_s = size(D,1);
+Ts = 0.07;
+time = (0:Ts:Ts*(N_s-1))';
 
 posicao0 = D(:,1:3); 
 velocidade0 = D(:,6:7);
-%[posicao,tempo,velocidade] = retorna_dados(Periodo,D1,D2,D3);
 dados = [posicao0,velocidade0];
-%[posicao,tempo,velocidade] = retorna_dados(0.115,dados);
-posicao = D(:,1:2);
+posicao = D(:,1:3);
 tempo = time;
 velocidade = velocidade0;
-constantes = csvread('variaveis_14.csv');
+X0 =[0,y0,0,0,0,0,0]';
 %%
-trajetoria = trajetoriaModelo(constantes,velocidade,time,X0);
-fCusto = otmModelo(constantes,posicao,velocidade,time,X0,constantes,1)
+constantes =  [0.0328, 0.123/2, 0.513, 0.08,     0.01,     0.0150,  0.109,    23,       0.0250,  0.0200,  1 ,1, 0.0028]; 
+variaveis = csvread("savede.csv");
+N = 50;
+solucao = variaveis(N,3:end);
 
-figure;
-plot(trajetoria(:,1), trajetoria(:,2),'r--','LineWidth', 1.5);
-hold on
-plot(posicao(:,1),posicao(:,2),'b-','LineWidth', 1.5);
-legend('Modelo', 'Dados')
+%%
+trajetoria_init = trajetoriaModelo(constantes,velocidade,time,X0);
+Custo_init = otmModelo(constantes,posicao,velocidade,time,X0,constantes,1)
 
+trajetoria = trajetoriaModelo(solucao,velocidade,time,X0);
+Custo_otm = otmModelo(solucao,posicao,velocidade,time,X0,constantes,1)
 
-
-figure
-subplot(1,2,1)
-plot(time, trajetoria(:,4),'r-','LineWidth', 1.5);
-hold on
-plot(time,D(:,4),'b-','LineWidth', 1.5);
-
-subplot(1,2,2)
-plot(time, trajetoria(:,5),'r-','LineWidth', 1.5);
-hold on
-plot(time,D(:,5),'b-','LineWidth', 1.5);
+plotDadosModelo(trajetoria,trajetoria_init,D,tempo)

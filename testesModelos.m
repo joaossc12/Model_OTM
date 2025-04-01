@@ -21,7 +21,7 @@ tempo = time;
 velocidade = velocidade0;
 X0 =[0,y0,0,0,0,0,0]';
 
-variaveis = csvread('50it13var.csv');
+variaveis = csvread('savede.csv');
 N = 50;
 solucao = variaveis(N,3:15);
 inicial = [0.0328, 0.123/2, 0.513, 0.08,     0.01,     0.0150,  0.109,    25,       0.0250,  0.0200,  1 ,1, 0.0028];
