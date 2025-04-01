@@ -20,7 +20,9 @@ epi = [
     X(6);
     X(7)];
 
-Y_pi = min(12, max( k_i*epi + k_p*(u-eta), -12) );
+Y_pi = min(9.2, max( k_i*epi + k_p*(u-eta), -9.2) );
+%eta(Y_pi < 1.5) = 0;
+
 
 theta_ponto = R*(eta(1)-eta(2))/(2*L);
 

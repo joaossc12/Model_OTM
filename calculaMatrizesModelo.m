@@ -1,26 +1,26 @@
 function [A_taum,V_TRACO,B_taum,M_TRACOi, R, L, F_s, F_k, alpha_s,alpha_k,k_i,k_p] = calculaMatrizesModelo(constantes)
-R = constantes(1); % Raio das rodas do robô (m)
-L = constantes(2); % Comprimento do semieixo das rodas do robô (m)
-m_c = constantes(3); % Massa da plataforma do robô
-m_w = constantes(4); % Massa da roda do robô
-d = constantes(5); 
+R = constantes(1); % Raio das rodas do robô (m) %OTM1
+L = constantes(2); % Comprimento do semieixo das rodas do robô (m) %OTM1
+m_c = constantes(3); % Massa da plataforma do robô %OTM1
+m_w = constantes(4); % Massa da roda do robô %OTM1
+d = constantes(5); %OTM1
 
-N_r = 48; %Relacao de engrenagens do motor CC
-N_l = 48; %Relacao de engrenagens do motor CC
-b_r = constantes(6); % Coeficiente de atrito viscoso do motor CC
-b_l = constantes(7); % Coeficiente de atrito viscoso do motor CC
-K_ce_r = constantes(8); % Constante de força contra-eletromotriz do motor CC 
-K_ce_l = constantes(9); % Constante de força contra-eletromotriz do motor CC 
-K_t_l = K_ce_l; % Constante de torque do motor CC 
-K_t_r = K_ce_r ; % Constante de torque do motor CC 
-R_a_r = constantes(10); %18 Resistencia de armadura total do robô
-R_a_l = constantes(11); % Resistencia de armadura total do robô
+N_r = 48; %Relacao de engrenagens do motor CC %OTM1
+N_l = 48; %Relacao de engrenagens do motor CC %OTM1
+b_r = constantes(6); % Coeficiente de atrito viscoso do motor CC %OTM1
+b_l = b_r;%constantes(7); % Coeficiente de atrito viscoso do motor CC %OTM1
+K_ce_r = constantes(7); % Constante de força contra-eletromotriz do motor CC %OTM1
+K_ce_l = constantes(7);%constantes(9); % Constante de força contra-eletromotriz do motor CC %OTM1
+K_t_l =constantes(7); %constantes(9); % Constante de torque do motor CC %OTM1
+K_t_r =constantes(7); %constantes(11); % Constante de torque do motor CC %OTM1
+R_a_r =constantes(8); %constantes(16);%23; % Resistencia de armadura total do robô %OTM1
+R_a_l =constantes(8);  %constantes(17);%26; % Resistencia de armadura total do robô
 
-f_s = constantes(12); % Coeficiente de atrito estático 
-f_k = constantes(13); % Coeficiente de atrito cinético
+f_s = constantes(9); % Coeficiente de atrito estático %OTM1
+f_k = constantes(10); % Coeficiente de atrito cinético %OTM1
 
-alpha_s = constantes(14); % Constante de saturação do atrito estático 
-alpha_k = constantes(15); % Constantes de saturação do atrito cinético
+alpha_s = constantes(11); % Constante de saturação do atrito estático %OTM1
+alpha_k = constantes(12); % Constantes de saturação do atrito cinético %OTM1
 
 k_i = [60 0; 0 60]; % Ganho Ki
 k_p = [9 0; 0 9]; % Ganho Kp
@@ -29,8 +29,8 @@ k_p = [9 0; 0 9]; % Ganho Kp
 g = 9.81; %Aceleracao da gravidade
 
 m = m_c + 2*m_w;
-I_c = constantes(16);
-I_w = 4.3034e-05; %m_w*R^2/2;
+I_c = constantes(13); %OTM1
+I_w = 4.3034e-05;%constantes(15); %OTM1
 I_t = I_c + 2*m_w*L^2 + 2*I_w + m_c*d^2;
 
 F_s = f_s*m*g;
