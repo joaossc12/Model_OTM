@@ -1,0 +1,15 @@
+# Ignorar arquivos de backup do MATLAB
+*.asv
+
+# Ignorar arquivos temporários do MATLAB
+*.m~
+*.bak
+*.swp
+
+# Ignorar arquivos de cache e compilação
+*.mex*
+*.p
+
+# Ignorar diretórios do MATLAB
+.DS_Store
+.matlab
